@@ -1,5 +1,4 @@
 var Hapi = require('hapi');
-var routes = require('./routes');
 
 var server = new Hapi.Server('0.0.0.0', 3000, {cors: true});
 
