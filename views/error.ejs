@@ -1,0 +1,10 @@
+<% include top.ejs %>
+<%if(typeof err != 'undefined'){%>
+	<h2 id="errorBox">
+		<a href="/" style="text-decoration: none;">&laquo;</a>
+		<span class="statusCode">ERROR <%=err.output.statusCode%>:</span>
+		<span class="error"><%=err.output.payload.error%></span>
+	</h2>
+	<!--<p><a href="/">Strona Główna</a></p>-->
+<%}%>
+<% include bottom.ejs %>
