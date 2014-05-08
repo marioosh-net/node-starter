@@ -3,6 +3,9 @@ var routes = require('./routes');
 
 var server = new Hapi.Server('0.0.0.0', 3000, {cors: true});
 
+/**
+ * configure template engine
+ */ 
 server.views({ 
 	engines: {
 		ejs: 'ejs'
@@ -10,9 +13,18 @@ server.views({
 	path: './views'
 });
 
-server.route(routes.main);
-server.route(routes.others);
+/**
+ * routes loader
+ */
+require('fs').readdirSync(__dirname + '/routes').forEach(function(file) {
+  if (file.match(/.+\.js/g) !== null && file !== 'index.js') {
+    server.route(require('./routes/' + file));
+  }
+});
 
+/**
+ * start server, print routing table
+ */
 server.start(function(){
     console.log('server started');
     console.log('routes:');
