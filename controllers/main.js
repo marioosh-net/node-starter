@@ -16,7 +16,7 @@ exports.home = function(request, reply) {
 };
 
 exports.add = function(request, reply) {
-	var kitty = new Cat({ name: request.payload.name});
+	var kitty = new Cat({ name: request.payload.name, color: request.payload.color});
 	kitty.save(function (err) {
 		if (err) {
 			throw err;
