@@ -1,6 +1,7 @@
 var Hapi = require('hapi');
+var Config = require('./config');
 
-var server = new Hapi.Server('0.0.0.0', 3000, {cors: true});
+var server = new Hapi.Server('0.0.0.0', Config.server.port, {cors: true});
 
 /**
  * configure template engine
@@ -38,7 +39,7 @@ server.ext('onPreResponse', function(request, reply) {
  * start server, print routing table
  */
 server.start(function(){
-    console.log('server started');
+    console.log('server started, port: '+Config.server.port);
     console.log('routes:');
     server.table().forEach(function(v){
         console.log(v.settings.method.toUpperCase()+": "+v.settings.path);  
