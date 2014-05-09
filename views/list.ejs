@@ -1,0 +1,11 @@
+<%if(typeof locals.kittens != 'undefined' && kittens.length > 0) {%>
+<ul class="list-group">
+	<%for(var i=0;i<kittens.length;i++){%>
+		<li class="list-group-item">			
+			<span class="left"> <img src="/static/images/kitty.jpg"/> <%=kittens[i].name%></span>
+			<button class="right btn btn-default" onclick="location.href='/del/<%=kittens[i]._id%>'">Delete</button> <div class="clear"></div>
+		</li>
+	<%}%>
+</ul>
+<button class="btn btn-default" onclick="location.href='/del'">Delete All</button>
+<%}%>

@@ -1,4 +1,5 @@
 var Hapi = require('hapi');
+var mongoose = require('mongoose');
 var Config = require('./config');
 
 var server = new Hapi.Server('0.0.0.0', Config.server.port, {cors: true});
@@ -14,12 +15,28 @@ server.views({
 });
 
 /**
+ * mongoose
+ * bootstrap db connection
+ */
+mongoose.connect(Config.db);
+
+/**
+ * mongoose
+ * bootstrap models
+ */
+var models_path = __dirname + '/models'
+require('fs').readdirSync(models_path).forEach(function(file) {
+    require(models_path+'/'+file)
+})
+
+/**
  * routes loader
  */
-require('fs').readdirSync(__dirname + '/routes').forEach(function(file) {
-  if (file.match(/.+\.js/g) !== null && file !== 'index.js') {
-    server.route(require('./routes/' + file));
-  }
+var routes_path = __dirname + '/routes';
+require('fs').readdirSync(routes_path).forEach(function(file) {
+    if (file.match(/.+\.js/g) !== null && file !== 'index.js') {
+        server.route(require(routes_path+'/'+file));
+    }
 });
 
 /**

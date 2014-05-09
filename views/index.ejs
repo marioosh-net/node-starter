@@ -2,5 +2,14 @@
 <div class="page-header">
 	<h2>Home</h2>
 </div>
+
+<!-- message -->
 <h3><%if(typeof locals.message != 'undefined'){%><%=message%><%}%></h3>
+
+<!-- add kitty form -->
+<% include form.ejs %>
+
+<!-- list of kittens -->
+<% include list.ejs %>
+
 <% include bottom.ejs %>

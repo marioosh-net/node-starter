@@ -30,3 +30,14 @@ body {
 .container .text-muted {
   margin: 20px 0;
 }
+
+/**/
+.clear {
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}

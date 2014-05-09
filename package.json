@@ -12,6 +12,7 @@
     "phantomjs":"*",
     "temp":"*",
     "socket.io":"*",
+    "mongoose":"*",
     "hapi-plugin-app": "git+https://github.com/marioosh-net/hapi-plugin-app"
   }
 }
