@@ -31,18 +31,25 @@ server.ext('onPreResponse', function(request, reply) {
         return reply();
     }
     var error = response;
-    reply.view('error', {error: error}).code(error.output.statusCode);	
+    reply.view('error', {error: error}).code(error.output.statusCode);
 });
 
-
 /**
- * start server, print routing table
+ * load hapi plugin module
  */
-server.start(function(){
-    console.log('server started, port: '+Config.server.port);
-    console.log('routes:');
-    server.table().forEach(function(v){
-        console.log(v.settings.method.toUpperCase()+": "+v.settings.path);  
-    });
-});        
+server.pack.require('./node_modules/hapi-plugin-app', function (err) {
+    if(err) {
+        throw err;
+    }
 
+    /**
+     * start server, print routing table
+     */
+    server.start(function(){
+        console.log('server started, port: '+Config.server.port);
+        console.log('routes:');
+        server.table().forEach(function(v){
+            console.log(v.settings.method.toUpperCase()+": "+v.settings.path);  
+        });
+    });            
+});

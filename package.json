@@ -11,6 +11,7 @@
     "node-phantom":"*",
     "phantomjs":"*",
     "temp":"*",
-    "socket.io":"*"
+    "socket.io":"*",
+    "hapi-plugin-app": "git+https://github.com/marioosh-net/hapi-plugin-app"
   }
 }
