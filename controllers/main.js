@@ -1,3 +1,4 @@
+var Joi = require('joi');
 var Cat = require('mongoose').model('Cat');
 
 var findKittens = function(callback) {
@@ -16,13 +17,29 @@ exports.home = function(request, reply) {
 };
 
 exports.add = function(request, reply) {
-	var kitty = new Cat({ name: request.payload.name, color: request.payload.color});
-	kitty.save(function (err) {
-		if (err) {
-			throw err;
-		}
-		reply().redirect('/');
+
+	/**
+	 * validate by joi validator
+	 */
+	var validation = Joi.validate(request.payload, {
+		name: Joi.string().min(5),
+		color: Joi.string()
 	});
+
+	if(validation == null) {
+		var kitty = new Cat({ name: request.payload.name, color: request.payload.color});
+		kitty.save(function (err) {
+			if (err) {
+				throw err;
+			}
+			reply().redirect('/');
+		});		
+	} else {
+		// reply with validation error message 
+		findKittens(function(kittens){
+			reply.view('index', {kittens: kittens, message: validation.message});
+		});			
+	}
 };
 
 exports.del = function(request, reply) {
