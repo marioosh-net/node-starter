@@ -1,11 +1,11 @@
 <form method="post" action="/add" role="form" class="form-inline">
  	<div class="form-group">
     	<label class="sr-only" for="name">Kitty name</label>
-    	<input type="text" name="name" class="form-control" id="name" placeholder="Kitty name">
+    	<input type="text" name="name" class="form-control" id="name" placeholder="Kitty name" value="<%if(typeof locals.payload != 'undefined'){%><%=payload.name%><%}%>"/>
   	</div>	
  	<div class="form-group">
     	<label class="sr-only" for="color">Kitty color</label>
-    	<input type="text" name="color" class="form-control" id="color" placeholder="Kitty color">
+    	<input type="text" name="color" class="form-control" id="color" placeholder="Kitty color" value="<%if(typeof locals.payload != 'undefined'){%><%=payload.color%><%}%>"/>
   	</div>	  	
   	<button type="submit" class="btn btn-default">Add</button>
 </form>
