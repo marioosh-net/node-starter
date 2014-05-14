@@ -30,12 +30,11 @@ exports.add = function(request, reply) {
 		var kitty = new Cat({ name: request.payload.name, color: request.payload.color});
 		kitty.save(function (err) {
 			if (err) {
-				throw err;
+				reply(err).code(400);
 			}
 			reply().code(200);
 		});		
 	} else {
-		// reply with validation error message 
 		reply(validation.message).code(400);
 	}
 };
@@ -44,9 +43,9 @@ exports.del = function(request, reply) {
 	var conditions = request.params.id ? {_id:request.params.id}:{};
 	Cat.remove(conditions, function(err) {
 		if (err) {
-			throw err;
+			reply(err).code(400);
 		}
-		reply().redirect('/');		
+		reply().code(200);
 	});
 };
 

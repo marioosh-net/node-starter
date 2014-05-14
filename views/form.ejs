@@ -9,3 +9,21 @@
   	</div>	  	
   	<button type="button" class="btn btn-default" id="add">Add</button>
 </form>
+<script>
+$(function (){
+	$('#add').click(function (){
+		$.ajax({
+			url: '/add',
+			method: 'post',
+			data: $("#add-form").serialize()
+		})
+		.done(function(data, status, request) {
+			$('#list').load('/list');
+			$('#message').text('');
+		})
+		.fail(function(jqXHR, status, error){
+			$('#message').text(jqXHR.responseText);
+		});				
+	});
+});
+</script>

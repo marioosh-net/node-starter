@@ -3,9 +3,22 @@
 	<%for(var i=0;i<kittens.length;i++){%>
 		<li class="list-group-item" style="<%if(kittens[i].color != null) {%>background-color:<%=kittens[i].color%>;<%}%>">			
 			<span class="left"> <img src="/static/images/kitty.jpg"/> <%=kittens[i].name%></span>
-			<button class="right btn btn-default" onclick="location.href='/del/<%=kittens[i]._id%>'">Delete</button> <div class="clear"></div>
+			<button class="delete right btn btn-default" kittenid="<%=kittens[i]._id%>">Delete</button> <div class="clear"></div>
 		</li>
 	<%}%>
 </ul>
-<button class="btn btn-default" onclick="location.href='/del'">Delete All</button>
+<button class="delete btn btn-default">Delete All</button>
 <%}%>
+<script>
+$(function (){
+	$('button.delete').click(function(){
+		var id = $(this).attr('kittenid');
+		$.ajax({
+			url: '/del/'+(typeof id != 'undefined' ? id : '')
+		})
+		.done(function(data, status, request){
+			$('#list').load('/list');
+		});
+	});
+});
+</script>
