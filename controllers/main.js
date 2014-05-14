@@ -32,17 +32,11 @@ exports.add = function(request, reply) {
 			if (err) {
 				throw err;
 			}
-			reply().redirect('/');
+			reply().code(200);
 		});		
 	} else {
 		// reply with validation error message 
-		findKittens(function(kittens){
-			reply.view('index', {
-				kittens: kittens, 
-				message: validation.message,
-				payload: request.payload
-			});
-		});			
+		reply(validation.message).code(400);
 	}
 };
 

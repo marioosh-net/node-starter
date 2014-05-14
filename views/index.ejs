@@ -4,12 +4,14 @@
 </div>
 
 <!-- message -->
-<h3><%if(typeof locals.message != 'undefined'){%><%=message%><%}%></h3>
+<h3 id="message"><%if(typeof locals.message != 'undefined'){%><%=message%><%}%></h3>
 
 <!-- add kitty form -->
 <% include form.ejs %>
 
 <!-- list of kittens -->
+<div id="list">
 <% include list.ejs %>
+<div>
 
 <% include bottom.ejs %>
