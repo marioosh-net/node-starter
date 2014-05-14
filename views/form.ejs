@@ -8,9 +8,14 @@
     	<input type="text" name="color" class="form-control" id="color" placeholder="Kitty color" value="<%if(typeof locals.payload != 'undefined'){%><%=payload.color%><%}%>"/>
   	</div>	  	
   	<button type="button" class="btn btn-default" id="add">Add</button>
+  	<div class="hidden-submit"><input type="submit" tabindex="-1"/></div>
 </form>
 <script>
 $(function (){
+	$('#add-form').submit(function(e){
+		$('#add').trigger('click');	
+		return false;
+	});
 	$('#add').click(function (){
 		$.ajax({
 			url: '/add',
