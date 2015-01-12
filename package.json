@@ -6,7 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "hapi":"*",
+    "hapi":"4.*",
+    "joi":"*",
     "ejs":"*",
     "node-phantom":"*",
     "phantomjs":"*",
