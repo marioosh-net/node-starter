@@ -32,6 +32,7 @@ exports.add = function(request, reply) {
 			if (err) {
 				reply(err).code(400);
 			}
+			kitty.speak();
 			reply().code(200);
 		});		
 	} else {
@@ -52,5 +53,11 @@ exports.del = function(request, reply) {
 exports.list = function(request, reply) {
 	findKittens(function(kittens){
 		reply.view('list', {kittens: kittens});
+	});
+};
+
+exports.list_json = function(request, reply) {
+	findKittens(function(kittens){
+		reply(kittens);
 	});
 };
