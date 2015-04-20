@@ -26,7 +26,7 @@ exports.add = function(request, reply) {
 		color: Joi.string()
 	});
 
-	if(validation == null) {
+	if(validation.error == null) {
 		var kitty = new Cat({ name: request.payload.name, color: request.payload.color});
 		kitty.save(function (err) {
 			if (err) {
