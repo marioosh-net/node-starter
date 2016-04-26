@@ -2,7 +2,8 @@ var Hapi = require('hapi');
 var mongoose = require('mongoose');
 var Config = require('./config');
 
-var server = new Hapi.Server('0.0.0.0', Config.server.port, {cors: true});
+var _port = process.env.PORT?process.env.PORT:Config.server.port;
+var server = new Hapi.Server('0.0.0.0', _port, {cors: true});
 
 /**
  * configure template engine
@@ -63,7 +64,7 @@ server.pack.require('./node_modules/hapi-plugin-app', function (err) {
      * start server, print routing table
      */
     server.start(function(){
-        console.log('server started, port: '+Config.server.port);
+        console.log('server started, port: '+_port);
         console.log('routes:');
         server.table().forEach(function(v){
             console.log(v.settings.method.toUpperCase()+": "+v.settings.path);  
